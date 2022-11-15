@@ -1,9 +1,9 @@
 window.Vue = require('vue');
 
 import Vue from 'vue';
-import App from'./components/App';
+import App from'./components/AppComponent';
 
 const app = new Vue({
     el: '#root',
-    render: h => h(app)
+    render: h => h(App)
 });
