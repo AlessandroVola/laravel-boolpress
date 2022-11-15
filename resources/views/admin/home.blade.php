@@ -1,6 +1,2 @@
-@extends('layout.app')
+@extends('layouts.dashboard')
 
-
-@section('content')
-    ciao
-@endsection
