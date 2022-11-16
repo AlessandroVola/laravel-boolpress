@@ -32,6 +32,8 @@ Route::middleware('auth')
         Route::resource('posts','PostController');
     });
 
+// qualunque cosa porta a guests home
 Route::get("{any?}", function() {
-    return view("guests.home");
+    return redirect()->route('index');
+    // return view("guests.home");
 })->where("any", ".*");
