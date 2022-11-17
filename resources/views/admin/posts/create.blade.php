@@ -11,6 +11,15 @@
             <label for="content">Contenuto post:</label>
             <textarea name="content" required cols="30" rows="10" value="{{ old('content', '') }}"></textarea>
         </div>
+        {{-- category --}}
+        <div>
+            <label for="category_id">Categoria:</label>
+            <select name="category_id" id="">
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div>
             <input type="submit" value="Crea Nuovo Post">
         </div>
