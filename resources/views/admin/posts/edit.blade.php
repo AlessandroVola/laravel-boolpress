@@ -12,6 +12,19 @@
             <label for="content">Contenuto post:</label>
             <textarea name="content" required cols="30" rows="10" value="{{ old('content', $post->content) }}"></textarea>
         </div>
+        {{-- category selection --}}
+        <div>
+            <label for="category_id">Categoria:</label>
+            <select name="category_id">
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}" 
+                    {{ $category->id == old('category_id', $post->category_id)? 'selected' : '' }}>
+                    {{ $category->name }}
+                
+                </option>
+                @endforeach
+            </select>
+        </div>
         <div>
             <input type="submit" value="Aggiorna Post">
         </div>
