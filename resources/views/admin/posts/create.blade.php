@@ -11,12 +11,16 @@
             <label for="content">Contenuto post:</label>
             <textarea name="content" required cols="30" rows="10" value="{{ old('content', '') }}"></textarea>
         </div>
-        {{-- category --}}
+        {{-- category selection --}}
         <div>
             <label for="category_id">Categoria:</label>
-            <select name="category_id" id="">
+            <select name="category_id">
                 @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" 
+                    {{ $category->id == old('category_id', '')? 'selected' : '' }}>
+                    {{ $category->name }}
+                
+                </option>
                 @endforeach
             </select>
         </div>

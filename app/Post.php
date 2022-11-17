@@ -11,6 +11,10 @@ class Post extends Model
     //contenuto
     //slug
 
-    protected $fillable =['title', 'content', 'slug'];
+    protected $fillable =['title', 'content', 'slug','category_id'];
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
 }
  
