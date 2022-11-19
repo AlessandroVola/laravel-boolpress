@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -31,7 +32,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact(['categories', 'tags']));
     }
 
     /**
@@ -53,6 +55,9 @@ class PostController extends Controller
         $form_data = $request->all();
         $post = new Post();
         $post->fill($form_data);
+
+        
+
         $slug = Str::slug($post->title);
         $slug_base = $slug;
 
@@ -66,6 +71,10 @@ class PostController extends Controller
 
         $post->slug = $slug;
         $post->save();
+
+        if(array_key_exists('tags',$form_data)){
+            $post->tags()->sync($form_data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post->id);
     }
@@ -92,7 +101,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.edit', compact(['post','categories']));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact(['post','categories','tags']));
 
     }
 
@@ -112,6 +122,13 @@ class PostController extends Controller
         ]);
 
         $form_data = $request->all();
+        
+        if(array_key_exists('tags',$form_data)){
+            $post->tags()->sync($form_data['tags']);
+        }else{
+            $post->tags()->sync([]);
+        }
+
         $post->update($form_data);
         return redirect()->route('admin.posts.show', $post->id);
 

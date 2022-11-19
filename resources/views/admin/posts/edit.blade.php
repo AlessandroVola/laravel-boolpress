@@ -25,6 +25,32 @@
                 @endforeach
             </select>
         </div>
+
+        {{-- tags selection --}}
+        @if($errors->any())
+            <div>
+                <label>Tags selected:</label>
+                @foreach($tags as $tag)
+                    <label>{{ $tag->name }}</label>
+                    <input 
+                    {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}
+                    type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                @endforeach
+            </div>
+        @else
+            <div>
+                <label>Tags selected:</label>
+                @foreach($tags as $tag)
+                    <label>{{ $tag->name }}</label>
+                    <input 
+                    {{ $post->tags->contains($tag) ? 'checked' : '' }}
+                    type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                @endforeach
+            </div>
+        @endif
+
+        
+
         <div>
             <input type="submit" value="Aggiorna Post">
         </div>

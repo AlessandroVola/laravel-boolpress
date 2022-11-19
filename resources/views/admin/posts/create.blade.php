@@ -24,6 +24,19 @@
                 @endforeach
             </select>
         </div>
+
+        {{-- tags selection --}}
+        <div>
+            <label>Tags selected:</label>
+            @foreach($tags as $tag)
+                <label for="tags[]">{{ $tag->name }}</label>
+                <input 
+                {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}
+                type="checkbox" name="tags[]" value="{{ $tag->id }}">
+            @endforeach
+        </div>
+
+
         <div>
             <input type="submit" value="Crea Nuovo Post">
         </div>
