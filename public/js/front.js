@@ -1933,7 +1933,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
-      errorMessage: ''
+      errorMessage: '',
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -1946,6 +1947,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         $this.errorMessage = data.error;
       }
+      _this.loading = false;
     });
   }
 });
@@ -1988,11 +1990,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    POSTS COMPONENT\n\n    "), _vm._l(_vm.posts, function (post) {
+  return _c("div", [_vm.loading ? _c("div", [_vm._v("\n        CARICAMENTO IN CORSO\n    ")]) : _vm.posts.length > 0 ? _c("div", _vm._l(_vm.posts, function (post) {
     return _c("div", {
       key: post.id
-    }, [_vm._v("\n        " + _vm._s(post.title) + "\n    ")]);
-  })], 2);
+    }, [_vm._v("\n            " + _vm._s(post.title) + "\n        ")]);
+  }), 0) : _c("div", [_vm._v("\n        NESSUN POST DA VISUALIZZARE\n    ")])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

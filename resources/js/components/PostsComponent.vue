@@ -1,9 +1,15 @@
 <template>
     <div>
-        POSTS COMPONENT
-
-        <div v-for="post in posts" :key="post.id">
-            {{ post.title }}
+        <div v-if="loading">
+            CARICAMENTO IN CORSO
+        </div>
+        <div v-else-if="posts.length > 0">
+            <div v-for="post in posts" :key="post.id">
+                {{ post.title }}
+            </div>
+        </div>
+        <div v-else>
+            NESSUN POST DA VISUALIZZARE
         </div>
     </div>
 </template>
@@ -14,7 +20,8 @@ export default {
     data() {
         return {
             posts: [],
-            errorMessage: ''
+            errorMessage: '',
+            loading: true
         }
 
     },
@@ -27,6 +34,7 @@ export default {
             } else {
                 $this.errorMessage = data.error;
             }
+            this.loading = false;
         })
 
 
