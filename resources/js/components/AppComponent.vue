@@ -1,16 +1,16 @@
 <template>
     <div>
-        <h1>Work in progress</h1>
-        <h2>Sito in costruzione</h2>
+        <ExampleComponent />
     </div>
 </template>
 
 <script>
+import ExampleComponent from './ExampleComponent.vue'
 
 
 export default {
     name: "App",
-    components: {}
+    components: { ExampleComponent }
 }
 </script>
 
