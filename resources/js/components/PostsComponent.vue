@@ -3,20 +3,33 @@
         <div v-if="loading">
             CARICAMENTO IN CORSO
         </div>
-        <div v-else-if="posts.length > 0">
+
+
+        <PostListComponent v-else :posts="posts" @clickedPost="showPost" />
+        <!-- <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post.id">
-                {{ post.title }}
+                <span @click="showPost(post.id)">{{ post.title }}</span>
             </div>
         </div>
         <div v-else>
             NESSUN POST DA VISUALIZZARE
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
+import PostComponent from './PostComponent.vue';
+
+import PostListComponent from './PostListComponent.vue';
+
+
+
 export default {
     name: 'PostsComponent',
+    components: {
+        PostComponent,
+        PostListComponent,
+    },
     data() {
         return {
             posts: [],
@@ -40,7 +53,23 @@ export default {
 
 
 
+    },
+    methods: {
+        showPost(id) {
+            console.log(id);
+            this.loading = true;
+            axios.get('api/posts/' + id)
+                .then(response => {
+                    console.log(response);
+                    this.loading = false;
+                })
+                .catch(e => {
+                    console.log('errore', e);
+                    this.loading = false;
+                })
+        }
     }
+
 }
 </script>
 
